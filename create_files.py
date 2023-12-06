@@ -24,9 +24,10 @@ with open(f'solutions/{day:02d}.py', 'w') as f:
         f"""from utils.runtime import get_runtime
 
 
-def get_input():
+def get_input(test: str = None):
     with open('inputs/{day:02d}') as f:
-        l = f.read().splitlines()
+        base = test or f.read()
+        l = base.splitlines()
 
     return l
 
