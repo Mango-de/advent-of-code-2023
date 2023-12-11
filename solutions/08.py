@@ -1,3 +1,4 @@
+import math
 import re
 from itertools import cycle
 
@@ -31,22 +32,25 @@ def part_1(instructions: cycle, nodes: dict[str, tuple[str, str]]):
     print(c)
 
 
-# @get_runtime
-# def part_2(instructions: cycle, nodes: dict[str, tuple[str, str]]):
-#     current_nodes = [n for n in nodes if n.endswith('A')]
-#     c = 0
+@get_runtime
+def part_2(instructions: cycle, nodes: dict[str, tuple[str, str]]):
+    current_nodes = [n for n in nodes if n.endswith('A')]
+    counts = []
 
-#     for i in instructions:
-#         c += 1
+    for current_node in current_nodes:
+        c = 0
 
-#         for j, node in enumerate(current_nodes):
-#             current_nodes[j] = nodes[node]['LR'.index(i)]
+        for i in instructions:
+            c += 1
+            current_node = nodes[current_node]['LR'.index(i)]
 
-#         if all(m.endswith('Z') for m in current_nodes):
-#             break
+            if current_node.endswith('Z'):
+                break
 
-#     print(c)
+        counts.append(c)
+
+    print(math.lcm(*counts))
 
 
 part_1(*get_input())
-# part_2(*get_input())
+part_2(*get_input())
